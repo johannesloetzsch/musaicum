@@ -1,0 +1,8 @@
+body {
+  margin: 0;
+  line-height: 0;
+}
+
+div.musaicum > img {
+  position: absolute;
+}
