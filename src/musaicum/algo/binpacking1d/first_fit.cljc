@@ -4,12 +4,14 @@
   (first (keep-indexed (fn [n item] (if (pred item) n)) coll)))
 
 (defn used-one-dimension [bin axis]
-  (->> (map axis (:items bin))
-       (reduce +)))
+  (if-not (= axis (:filling-axis bin))
+          0
+          (->> (map axis (:items bin))
+               (reduce +))))
 
 (defn fit1d? [item bin]
   (let [remaining-width (- (:width bin) (used-one-dimension bin :width))
-        remaining-height (- (:height bin) 0 #_(used-one-dimension bin :height))]
+        remaining-height (- (:height bin) (used-one-dimension bin :height))]
        (and (<= (:width item) remaining-width)
             (<= (:height item) remaining-height))))
 
@@ -29,7 +31,7 @@
                                                     [(let [bin (nth bins first-fit-bin)]
                                                           (update bin :items #(concat % [(assoc item
                                                                                                 :x (used-one-dimension bin :width)
-                                                                                                :y 0)])))]
+                                                                                                :y (used-one-dimension bin :height))])))]
                                                     (drop (inc first-fit-bin) bins))))))))
 
 (defn binpack [{:keys [items bins] :as args}]

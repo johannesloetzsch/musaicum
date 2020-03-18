@@ -1,17 +1,20 @@
 (ns musaicum.state
   (:require [reagent.core :as r]
-            [musaicum.img-src.archive-org :refer [query-img-ids each-img-url]]
+            [musaicum.img-src.archive-org]
             [musaicum.arrange.core :refer [arrange-all]]))
 
 (defonce app-state (r/atom {:imgs {}}))
 
-(defn load-images
-  []
-  (if (empty? (:imgs @app-state))
-      (let [assoc-img-urls (fn [query-response]
-                               (each-img-url query-response
-                                             {:callback (fn [url] (swap! app-state update-in [:imgs url] #(or % {})))}))]
-           (query-img-ids "collection:(solarsystemcollection)" {:callback assoc-img-urls :limit 15}))))
+
+(defn load-all-images []
+  (let [loaders (js/Array.from (js/document.querySelectorAll ".musaicum.loader"))]
+       (doseq [loader loaders
+               :let [source (.getAttribute loader "source")]]
+              (case source
+                    "archive.org"
+                      (musaicum.img-src.archive-org/load-images app-state {:query (.getAttribute loader "query")
+                                                                           :limit (.getAttribute loader "limit")})
+                    (js/console.error "Unknown `source`:" source)))))
 
 
 (defn decoupled-arrange [&[{:keys [ms] :or {ms 1000}}]]

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="https://clojurescript.org/images/cljs-logo-icon-32.png">
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <script src="/js/compiled/main.js" type="text/javascript"></script>
+		<style>
+		  body {margin: 0;}
+		  .grid {grid-template-columns: 30% 40% 30%;
+						 grid-template-rows: 30% 40% 30% 100%;
+						 grid-template-areas: "header header header"
+						                      "left   focus  right"
+						                      "left   center right"
+																	"bottom bottom bottom";}
+		</style>
+  </head>
+  <body onload="musaicum.core.init()">
+	  <div class="grid">
+  	  <div style="grid-area: header" class="musaicum bin horizontal">&nbsp;</div>
+  	  <div style="grid-area: focus">&nbsp;</div>
+  	  <div style="grid-area: left" class="musaicum bin"></div>
+  	  <div style="grid-area: center" class="musaicum bin">&nbsp;</div>
+  	  <div style="grid-area: right" class="musaicum bin"></div>
+  	  <div style="grid-area: bottom" class="musaicum bin horizontal"></div>
+    </div>
+    <div class="musaicum bin fallback hidden">
+		  <div class="musaicum loader" source="archive.org" query="collection:(solarsystemcollection)" limit="20"/>
+    </div>
+  </body>
+</html>

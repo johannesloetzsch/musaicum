@@ -1,8 +1,6 @@
-body {
-  margin: 0;
-  line-height: 0;
-}
+.grid {display: grid;
+		   position: absolute; height: 100%; width: 100%;}
 
-div.musaicum > img {
-  position: absolute;
+.musaicum.hidden {
+  height: 0; width: 0; overflow: hidden;
 }

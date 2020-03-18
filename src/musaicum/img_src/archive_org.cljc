@@ -32,3 +32,11 @@
 
 (comment (query-img-ids "collection:(solarsystemcollection)")
          (query-img-ids "collection:(solarsystemcollection)" {:callback each-img-url}))
+
+
+(defn load-images [app-state {:keys [query limit] :or {limit ##Inf}}]
+  (if (empty? (:imgs @app-state))
+      (let [assoc-img-urls (fn [query-response]
+                               (each-img-url query-response
+                                             {:callback (fn [url] (swap! app-state update-in [:imgs url] #(or % {})))}))]
+           (query-img-ids query {:callback assoc-img-urls :limit limit}))))
