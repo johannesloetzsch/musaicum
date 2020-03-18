@@ -9,7 +9,7 @@
 		<style>
 		  body {margin: 0;}
 		  .grid {grid-template-columns: 30% 40% 30%;
-						 grid-template-rows: 30% 40% 30% 100%;
+						 grid-template-rows: 30% 40% 80% 50%;
 						 grid-template-areas: "header header header"
 						                      "left   focus  right"
 						                      "left   center right"
@@ -17,16 +17,19 @@
 		</style>
   </head>
   <body onload="musaicum.core.init()">
+		<div class="musaicum background" style="height: 200%">
+			<div class="musaicum loader" source="archive.org" query="(random fractal)" limit="2"></div>
+    </div>
 	  <div class="grid">
-  	  <div style="grid-area: header" class="musaicum bin horizontal">&nbsp;</div>
-  	  <div style="grid-area: focus">&nbsp;</div>
+  	  <div style="grid-area: header" class="musaicum bin horizontal"></div>
+  	  <div style="grid-area: focus"></div>
   	  <div style="grid-area: left" class="musaicum bin"></div>
-  	  <div style="grid-area: center" class="musaicum bin">&nbsp;</div>
+  	  <div style="grid-area: center" class="musaicum bin"></div>
   	  <div style="grid-area: right" class="musaicum bin"></div>
   	  <div style="grid-area: bottom" class="musaicum bin horizontal"></div>
     </div>
     <div class="musaicum bin fallback hidden">
-		  <div class="musaicum loader" source="archive.org" query="collection:(solarsystemcollection)" limit="20"/>
+			<div class="musaicum loader" source="archive.org" query="collection:(solarsystemcollection)" limit="20"></div>
     </div>
   </body>
 </html>

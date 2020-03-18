@@ -2,10 +2,13 @@
   (:require [reagent.dom :as rd]
             [musaicum.state :as state :refer [app-state load-all-images img-attrs->state+arrange decoupled-arrange]]))
 
-(defn images [loader]  ;; TODO only the images of this one loader
-  [:div (for [[img-src img-data] (:imgs @app-state)]
+(defn images [loader]
+  [:div (for [[img-src img-data] (->> (:imgs @app-state)
+                                      (filter #(= loader (:loader (val %)))))]
              [:img {:key img-src
-                    :class "musaicum item"
+                    :class (clojure.string/join " " ["musaicum"
+                                                     (if (some #{"bin"} (js/Array.from (.-classList (.-parentElement loader))))
+                                                         "item")])
                     :id img-src
                     :src img-src
                     :onLoad img-attrs->state+arrange}])])

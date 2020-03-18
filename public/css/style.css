@@ -1,5 +1,22 @@
-.grid {display: grid;
-		   position: absolute; height: 100%; width: 100%;}
+.grid {
+	display: grid;
+	position: absolute; height: 100%; width: 100%;
+}
+
+.musaicum {
+  line-height: 0;
+}
+
+.musaicum.background {
+  position: absolute;
+	width: 100%;
+	overflow: hidden;
+}
+
+.musaicum.background * {
+  position: relative;
+	min-height: 100%; min-width: 100%;
+}
 
 .musaicum.hidden {
   height: 0; width: 0; overflow: hidden;

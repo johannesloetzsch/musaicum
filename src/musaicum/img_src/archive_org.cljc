@@ -3,7 +3,7 @@
 
 (defn- img-url [details-response]
   (->> details-response :files
-       (filter #(#{"JPEG"} (:format %)))
+       (filter #(#{"JPEG" "jpeg"} (:format %)))
        first :name))
 
 (defn query-img-url [id &[{:keys [callback] :or {callback prn}}]]
@@ -34,9 +34,9 @@
          (query-img-ids "collection:(solarsystemcollection)" {:callback each-img-url}))
 
 
-(defn load-images [app-state {:keys [query limit] :or {limit ##Inf}}]
-  (if (empty? (:imgs @app-state))
-      (let [assoc-img-urls (fn [query-response]
-                               (each-img-url query-response
-                                             {:callback (fn [url] (swap! app-state update-in [:imgs url] #(or % {})))}))]
-           (query-img-ids query {:callback assoc-img-urls :limit limit}))))
+(defn load-images [app-state loaderReference {:keys [query limit] :or {limit 99}}]
+  (let [assoc-img-urls (fn [query-response]
+                           (each-img-url query-response
+                                         {:callback (fn [url] (swap! app-state update-in [:imgs url]
+                                                                     #(or % {:loader loaderReference})))}))]
+       (query-img-ids query {:callback assoc-img-urls :limit limit})))

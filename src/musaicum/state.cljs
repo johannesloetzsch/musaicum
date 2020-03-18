@@ -7,14 +7,15 @@
 
 
 (defn load-all-images []
-  (let [loaders (js/Array.from (js/document.querySelectorAll ".musaicum.loader"))]
-       (doseq [loader loaders
-               :let [source (.getAttribute loader "source")]]
-              (case source
-                    "archive.org"
-                      (musaicum.img-src.archive-org/load-images app-state {:query (.getAttribute loader "query")
-                                                                           :limit (.getAttribute loader "limit")})
-                    (js/console.error "Unknown `source`:" source)))))
+  (if (empty? (:imgs @app-state))
+      (let [loaders (js/Array.from (js/document.querySelectorAll ".musaicum.loader"))]
+           (doseq [loader loaders
+                   :let [source (.getAttribute loader "source")]]
+                  (case source
+                        "archive.org"
+                          (musaicum.img-src.archive-org/load-images app-state loader {:query (.getAttribute loader "query")
+                                                                                      :limit (.getAttribute loader "limit")})
+                        (js/console.error "Unknown `source`:" source))))))
 
 
 (defn decoupled-arrange [&[{:keys [ms] :or {ms 1000}}]]
