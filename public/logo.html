@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="./musaicum.ico">
+    <link href="./css/style.css" rel="stylesheet" type="text/css">
+		<style>
+		  .grid {height: 30px;
+  			     width: 30px;
+				     grid-template-columns: 3px 3px 3px 3px 2px 3px 3px 3px;
+						 grid-template-rows:    3px 3px 3px 3px 2px 3px 3px 3px;
+						 grid-template-areas:  "mu  mu  s   v   v   v   v   v"
+						                       "mu  mu  s   ai  ai  w   w   w"
+						                       "mu  mu  s   ai  ai  c   um  um"
+						                       "mu  mu  s   ai  ai  c   um  um"
+						                       "x   x   s   ai  ai  c   um  um"
+						                       "x   x   y   y   y   y   um  um"
+																	 "z   z   z   z   z   z   z   z"
+																	 "z   z   z   z   z   z   z   z";
+        		 grid-gap: 1px;
+						 padding: 1px;
+			       background: darkgrey;}
+		  .grid div {display: flex;
+				         align-items: center;
+      				   justify-content: center;
+	  		         background: antiquewhite;}
+		</style>
+  </head>
+  <body>
+	  <div class="grid">
+  	  <div style="grid-area: mu; font-size: 7px;">
+				<p>mu</p></div>
+  	  <div style="grid-area: s ; font-size: 8px;">
+				<p><i>s</i></p></div>
+  	  <div style="grid-area: ai; font-size: 8px;">
+				<p><b>AI</b></p></div>
+  	  <div style="grid-area: c ; font-size: 8px;">
+				<p><i>c</i></p></div>
+  	  <div style="grid-area: um; font-size: 7px;">
+				<p>um</p></div>
+			<div style="grid-area: v;">&nbsp;</div>
+			<div style="grid-area: w;">&nbsp;</div>
+			<div style="grid-area: x;">&nbsp;</div>
+			<div style="grid-area: y;">&nbsp;</div>
+			<div style="grid-area: z;">&nbsp;</div>
+    </div>
+  </body>
+</html>
