@@ -15,8 +15,8 @@
 
 (defn example-app []
   [:div {:class "grid" :style {:grid-template-areas "\"example1\" \"example2\"  \"fallback\""}}
-    [:div {:style {:grid-area "example1"} :class "musaicum bin horizontal"} " "]
-    [:div {:style {:grid-area "example2"} :class "musaicum bin horizontal"} " "]
+    [:div {:style {:grid-area "example1"} :class "musaicum bin horizontal debug"} " "]
+    [:div {:style {:grid-area "example2"} :class "musaicum bin horizontal debug"} " "]
     [:div {:style {:grid-area "fallback"} :class "musaicum bin fallback"}
 		  [:div {:class "musaicum loader" :source "archive.org" :query "collection:(solarsystemcollection)" :limit "10"}]]])
 

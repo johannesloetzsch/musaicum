@@ -8,6 +8,9 @@ body {
 
 .musaicum {
   line-height: 0;
+}
+
+.debug {
 	background: url(../musaicum.ico);
 }
 

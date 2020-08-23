@@ -1,5 +1,6 @@
 (ns musaicum.state
   (:require [reagent.core :as r]
+            [musaicum.img-src.local]
             [musaicum.img-src.archive-org]
             [musaicum.arrange.core :refer [arrange-all]]))
 
@@ -12,6 +13,8 @@
            (doseq [loader loaders
                    :let [source (.getAttribute loader "source")]]
                   (case source
+                        "local"
+                          (musaicum.img-src.local/load-images app-state loader {:url (.getAttribute loader "url")})
                         "archive.org"
                           (musaicum.img-src.archive-org/load-images app-state loader {:query (.getAttribute loader "query")
                                                                                       :limit (.getAttribute loader "limit")})
@@ -28,7 +31,7 @@
   "onLoad() get attributes from every image and merge them into app-state; then arrange"
   [syntheticEvent &[{:keys [scale] :or {scale 0.15}}]]
   (let [imgElement (.-target syntheticEvent)
-        id (.-src imgElement)
+        id (.-id imgElement)
         if>0 #(if (> % 0) %)
         attrs (-> {:id id
                    :width (if>0 (.-naturalWidth imgElement))
