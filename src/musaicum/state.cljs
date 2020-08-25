@@ -1,6 +1,7 @@
 (ns musaicum.state
   (:require [reagent.core :as r]
             [musaicum.img-src.local]
+            [musaicum.img-src.dropbox]
             [musaicum.img-src.archive-org]
             [musaicum.arrange.core :refer [arrange-all]]))
 
@@ -15,9 +16,13 @@
                   (case source
                         "local"
                           (musaicum.img-src.local/load-images app-state loader {:url (.getAttribute loader "url")})
+                        "dropbox"
+                          (musaicum.img-src.dropbox/load-images app-state loader {:bearer (.getAttribute loader "bearer")
+                                                                                  :path (.getAttribute loader "path")
+                                                                                  :limit (int (.getAttribute loader "limit" 0))})
                         "archive.org"
                           (musaicum.img-src.archive-org/load-images app-state loader {:query (.getAttribute loader "query")
-                                                                                      :limit (.getAttribute loader "limit")})
+                                                                                      :limit (int (.getAttribute loader "limit" 0))})
                         (js/console.error "Unknown `source`:" source))))))
 
 

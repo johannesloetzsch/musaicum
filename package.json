@@ -1,4 +1,6 @@
 {
+  "name": "musaicum",
+  "version": "0.0.1",
   "scripts": {
     "deps": "yarn install",
     "watch": "shadow-cljs watch app;",
